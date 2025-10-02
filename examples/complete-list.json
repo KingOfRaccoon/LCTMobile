@@ -1,0 +1,228 @@
+{
+  "document": {
+    "documentId": "example_list",
+    "name": "Product List",
+    "exportedAt": "2025-09-30T12:00:00Z"
+  },
+  "screen": {
+    "id": "screen_products",
+    "type": "screen",
+    "name": "Products",
+    "sections": {
+      "topBar": {
+        "type": "surface",
+        "style": {
+          "elevation": 2,
+          "padding": 16
+        },
+        "children": [
+          {
+            "type": "title",
+            "content": "Featured Products"
+          }
+        ]
+      },
+      "body": {
+        "type": "lazycolumn",
+        "style": {
+          "spacing": 12,
+          "contentPadding": 16
+        },
+        "children": [
+          {
+            "type": "card",
+            "properties": {
+              "clickable": true
+            },
+            "style": {
+              "elevation": 2,
+              "borderRadius": 12
+            },
+            "action": {
+              "type": "navigate",
+              "screenId": "product_detail_1"
+            },
+            "children": [
+              {
+                "type": "column",
+                "style": {
+                  "spacing": 8
+                },
+                "children": [
+                  {
+                    "type": "image",
+                    "properties": {
+                      "url": "https://example.com/product1.jpg",
+                      "description": "Wireless Headphones"
+                    }
+                  },
+                  {
+                    "type": "title",
+                    "content": "Premium Wireless Headphones"
+                  },
+                  {
+                    "type": "text",
+                    "content": "High-quality sound with active noise cancellation"
+                  },
+                  {
+                    "type": "divider",
+                    "style": {
+                      "marginVertical": 8
+                    }
+                  },
+                  {
+                    "type": "row",
+                    "style": {
+                      "spacing": 8
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "content": "$299.99",
+                        "style": {
+                          "color": "#6200EE"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "content": "⭐ 4.8 (256 reviews)"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "card",
+            "properties": {
+              "clickable": true
+            },
+            "style": {
+              "elevation": 2,
+              "borderRadius": 12
+            },
+            "action": {
+              "type": "navigate",
+              "screenId": "product_detail_2"
+            },
+            "children": [
+              {
+                "type": "column",
+                "style": {
+                  "spacing": 8
+                },
+                "children": [
+                  {
+                    "type": "image",
+                    "properties": {
+                      "url": "https://example.com/product2.jpg",
+                      "description": "Smart Watch"
+                    }
+                  },
+                  {
+                    "type": "title",
+                    "content": "Fitness Smart Watch"
+                  },
+                  {
+                    "type": "text",
+                    "content": "Track your health and fitness goals"
+                  },
+                  {
+                    "type": "divider",
+                    "style": {
+                      "marginVertical": 8
+                    }
+                  },
+                  {
+                    "type": "row",
+                    "style": {
+                      "spacing": 8
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "content": "$199.99",
+                        "style": {
+                          "color": "#6200EE"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "content": "⭐ 4.6 (189 reviews)"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "card",
+            "properties": {
+              "clickable": true
+            },
+            "style": {
+              "elevation": 2,
+              "borderRadius": 12
+            },
+            "action": {
+              "type": "navigate",
+              "screenId": "product_detail_3"
+            },
+            "children": [
+              {
+                "type": "column",
+                "style": {
+                  "spacing": 8
+                },
+                "children": [
+                  {
+                    "type": "image",
+                    "properties": {
+                      "url": "https://example.com/product3.jpg",
+                      "description": "Laptop"
+                    }
+                  },
+                  {
+                    "type": "title",
+                    "content": "Ultra Thin Laptop"
+                  },
+                  {
+                    "type": "text",
+                    "content": "Powerful performance in a sleek design"
+                  },
+                  {
+                    "type": "divider",
+                    "style": {
+                      "marginVertical": 8
+                    }
+                  },
+                  {
+                    "type": "row",
+                    "style": {
+                      "spacing": 8
+                    },
+                    "children": [
+                      {
+                        "type": "text",
+                        "content": "$1,299.99",
+                        "style": {
+                          "color": "#6200EE"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "content": "⭐ 4.9 (412 reviews)"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

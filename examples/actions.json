@@ -1,0 +1,119 @@
+{
+  "actions_examples": [
+    {
+      "name": "Navigate to another screen",
+      "action": {
+        "type": "navigate",
+        "screenId": "screen_details",
+        "clearStack": false
+      }
+    },
+    {
+      "name": "Navigate back",
+      "action": {
+        "type": "navigate_back"
+      }
+    },
+    {
+      "name": "Open external URL",
+      "action": {
+        "type": "navigate_external",
+        "url": "https://example.com"
+      }
+    },
+    {
+      "name": "API call (GET)",
+      "action": {
+        "type": "api_call",
+        "endpoint": "/api/users",
+        "method": "GET"
+      }
+    },
+    {
+      "name": "API call (POST with body)",
+      "action": {
+        "type": "api_call",
+        "endpoint": "/api/submit",
+        "method": "POST",
+        "body": {
+          "name": "John Doe",
+          "email": "john@example.com"
+        },
+        "onSuccess": "show_success_message",
+        "onError": "show_error_message"
+      }
+    },
+    {
+      "name": "Set state value",
+      "action": {
+        "type": "set_state",
+        "key": "username",
+        "value": "john_doe"
+      }
+    },
+    {
+      "name": "Toggle boolean state",
+      "action": {
+        "type": "toggle_state",
+        "key": "darkMode"
+      }
+    },
+    {
+      "name": "Show snackbar",
+      "action": {
+        "type": "show_snackbar",
+        "message": "Item added to cart",
+        "duration": 3000,
+        "actionLabel": "UNDO"
+      }
+    },
+    {
+      "name": "Show dialog",
+      "action": {
+        "type": "show_dialog",
+        "title": "Confirm Action",
+        "message": "Are you sure you want to delete this item?",
+        "confirmLabel": "Delete",
+        "cancelLabel": "Cancel",
+        "onConfirm": "delete_item",
+        "onCancel": "cancel_delete"
+      }
+    },
+    {
+      "name": "Refresh screen",
+      "action": {
+        "type": "refresh"
+      }
+    },
+    {
+      "name": "Share content",
+      "action": {
+        "type": "share",
+        "text": "Check out this amazing product!",
+        "url": "https://example.com/product/123"
+      }
+    },
+    {
+      "name": "Execute multiple actions (batch)",
+      "action": {
+        "type": "batch",
+        "actions": [
+          {
+            "type": "set_state",
+            "key": "loading",
+            "value": "true"
+          },
+          {
+            "type": "api_call",
+            "endpoint": "/api/data",
+            "method": "GET"
+          },
+          {
+            "type": "show_snackbar",
+            "message": "Data loaded successfully"
+          }
+        ]
+      }
+    }
+  ]
+}

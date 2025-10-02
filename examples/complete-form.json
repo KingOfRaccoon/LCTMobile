@@ -1,0 +1,128 @@
+{
+  "document": {
+    "documentId": "example_form",
+    "name": "User Registration Form",
+    "exportedAt": "2025-09-30T12:00:00Z"
+  },
+  "screen": {
+    "id": "screen_register",
+    "type": "screen",
+    "name": "Registration",
+    "sections": {
+      "topBar": {
+        "type": "surface",
+        "style": {
+          "elevation": 4,
+          "padding": 16,
+          "backgroundColor": "#6200EE"
+        },
+        "children": [
+          {
+            "type": "title",
+            "content": "Create Account",
+            "style": {
+              "color": "#FFFFFF"
+            }
+          }
+        ]
+      },
+      "body": {
+        "type": "column",
+        "style": {
+          "padding": 24,
+          "spacing": 16
+        },
+        "children": [
+          {
+            "type": "textfield",
+            "id": "field_name",
+            "properties": {
+              "label": "Full Name",
+              "placeholder": "Enter your name",
+              "value": ""
+            }
+          },
+          {
+            "type": "textfield",
+            "id": "field_email",
+            "properties": {
+              "label": "Email",
+              "placeholder": "your@email.com",
+              "value": ""
+            }
+          },
+          {
+            "type": "textfield",
+            "id": "field_password",
+            "properties": {
+              "label": "Password",
+              "placeholder": "Min 8 characters",
+              "value": "",
+              "multiline": false
+            }
+          },
+          {
+            "type": "divider",
+            "style": {
+              "marginVertical": 8
+            }
+          },
+          {
+            "type": "dropdown",
+            "id": "field_country",
+            "properties": {
+              "label": "Country",
+              "placeholder": "Select country",
+              "options": [
+                {"label": "United States", "value": "us"},
+                {"label": "Canada", "value": "ca"},
+                {"label": "United Kingdom", "value": "uk"},
+                {"label": "Germany", "value": "de"}
+              ]
+            }
+          },
+          {
+            "type": "checkbox",
+            "id": "field_terms",
+            "properties": {
+              "label": "I agree to Terms and Conditions",
+              "checked": false
+            },
+            "style": {
+              "marginVertical": 8
+            }
+          },
+          {
+            "type": "switch",
+            "id": "field_newsletter",
+            "properties": {
+              "label": "Subscribe to newsletter",
+              "checked": true
+            }
+          },
+          {
+            "type": "spacer",
+            "style": {
+              "height": 24
+            }
+          },
+          {
+            "type": "button",
+            "content": "Create Account",
+            "style": {
+              "backgroundColor": "#6200EE",
+              "padding": 16
+            },
+            "action": {
+              "type": "api_call",
+              "endpoint": "/api/register",
+              "method": "POST",
+              "onSuccess": "registration_success",
+              "onError": "registration_error"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

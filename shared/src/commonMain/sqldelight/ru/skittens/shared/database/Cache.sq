@@ -1,0 +1,42 @@
+CREATE TABLE screens (
+    id TEXT NOT NULL PRIMARY KEY,
+    json TEXT NOT NULL,
+    updatedAt INTEGER NOT NULL
+);
+
+CREATE TABLE pending_events (
+    id TEXT NOT NULL PRIMARY KEY,
+    actionType TEXT NOT NULL,
+    payload TEXT NOT NULL,
+    endpoint TEXT,
+    method TEXT,
+    createdAt INTEGER NOT NULL
+);
+
+getScreenById:
+SELECT *
+FROM screens
+WHERE id = ?;
+
+getAllScreens:
+SELECT *
+FROM screens;
+
+upsertScreen:
+INSERT OR REPLACE INTO screens(id, json, updatedAt)
+VALUES (?, ?, ?);
+
+deleteScreen:
+DELETE FROM screens WHERE id = ?;
+
+enqueueEvent:
+INSERT OR REPLACE INTO pending_events(id, actionType, payload, endpoint, method, createdAt)
+VALUES (?, ?, ?, ?, ?, ?);
+
+listPendingEvents:
+SELECT *
+FROM pending_events
+ORDER BY createdAt ASC;
+
+deleteEvent:
+DELETE FROM pending_events WHERE id = ?;

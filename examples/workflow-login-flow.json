@@ -1,0 +1,149 @@
+{
+  "states": {
+    "states": [
+      {
+        "state_type": "service",
+        "name": "__init__",
+        "transitions": [
+          {
+            "target_state": "login_screen",
+            "condition": null
+          }
+        ],
+        "initial_state": true,
+        "final_state": false
+      },
+      {
+        "state_type": "screen",
+        "name": "login_screen",
+        "transitions": [
+          {
+            "target_state": "validate_credentials",
+            "event_name": "submit"
+          }
+        ],
+        "initial_state": false,
+        "final_state": false
+      },
+      {
+        "state_type": "technical",
+        "name": "validate_credentials",
+        "transitions": [
+          {
+            "target_state": "authenticate_user",
+            "condition": "is_valid"
+          },
+          {
+            "target_state": "login_screen",
+            "condition": "not is_valid"
+          }
+        ],
+        "expressions": [
+          {
+            "variable": "is_valid",
+            "dependent_variables": ["username", "password"],
+            "expression": "len(username) > 0 and len(password) >= 6"
+          }
+        ],
+        "initial_state": false,
+        "final_state": false
+      },
+      {
+        "state_type": "integration",
+        "name": "authenticate_user",
+        "transitions": [
+          {
+            "target_state": "dashboard_screen",
+            "condition": "auth_success"
+          },
+          {
+            "target_state": "login_screen",
+            "condition": "not auth_success"
+          }
+        ],
+        "integration_config": {
+          "variable": "auth_response",
+          "url": "https://api.example.com/auth/login",
+          "params": {
+            "username": "$username",
+            "password": "$password"
+          },
+          "method": "post"
+        },
+        "expressions": [
+          {
+            "variable": "auth_success",
+            "dependent_variables": ["auth_response"],
+            "expression": "auth_response.get('status') == 'success'"
+          },
+          {
+            "variable": "user_token",
+            "dependent_variables": ["auth_response"],
+            "expression": "auth_response.get('token', '')"
+          }
+        ],
+        "initial_state": false,
+        "final_state": false
+      },
+      {
+        "state_type": "screen",
+        "name": "dashboard_screen",
+        "transitions": [
+          {
+            "target_state": "logout",
+            "event_name": "logout"
+          }
+        ],
+        "initial_state": false,
+        "final_state": false
+      },
+      {
+        "state_type": "technical",
+        "name": "logout",
+        "transitions": [
+          {
+            "target_state": "login_screen"
+          }
+        ],
+        "expressions": [
+          {
+            "variable": "username",
+            "dependent_variables": [],
+            "expression": "''"
+          },
+          {
+            "variable": "password",
+            "dependent_variables": [],
+            "expression": "''"
+          },
+          {
+            "variable": "user_token",
+            "dependent_variables": [],
+            "expression": "''"
+          }
+        ],
+        "initial_state": false,
+        "final_state": false
+      },
+      {
+        "state_type": "service",
+        "name": "__error__",
+        "transitions": [
+          {
+            "target_state": "login_screen"
+          }
+        ],
+        "initial_state": false,
+        "final_state": false
+      }
+    ]
+  },
+  "predefined_context": {
+    "username": "",
+    "password": "",
+    "is_valid": false,
+    "auth_success": false,
+    "user_token": "",
+    "min_password_length": 6
+  }
+}

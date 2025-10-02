@@ -1,0 +1,69 @@
+{
+  "states": {
+    "states": [
+      {
+        "state_type": "service",
+        "name": "__init__",
+        "transitions": [
+          {
+            "target_state": "welcome_screen"
+          }
+        ],
+        "initial_state": true,
+        "final_state": false
+      },
+      {
+        "state_type": "screen",
+        "name": "welcome_screen",
+        "transitions": [
+          {
+            "target_state": "process_data",
+            "event_name": "start"
+          }
+        ],
+        "initial_state": false,
+        "final_state": false
+      },
+      {
+        "state_type": "technical",
+        "name": "process_data",
+        "transitions": [
+          {
+            "target_state": "result_screen"
+          }
+        ],
+        "expressions": [
+          {
+            "variable": "result",
+            "dependent_variables": ["input_value"],
+            "expression": "input_value * 2"
+          },
+          {
+            "variable": "message",
+            "dependent_variables": ["result"],
+            "expression": "f'Result is {result}'"
+          }
+        ],
+        "initial_state": false,
+        "final_state": false
+      },
+      {
+        "state_type": "screen",
+        "name": "result_screen",
+        "transitions": [
+          {
+            "target_state": "welcome_screen",
+            "event_name": "restart"
+          }
+        ],
+        "initial_state": false,
+        "final_state": true
+      }
+    ]
+  },
+  "predefined_context": {
+    "input_value": 10,
+    "result": 0,
+    "message": ""
+  }
+}

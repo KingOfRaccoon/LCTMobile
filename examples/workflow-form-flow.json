@@ -1,0 +1,149 @@
+{
+  "states": {
+    "states": [
+      {
+        "state_type": "service",
+        "name": "__init__",
+        "transitions": [
+          {
+            "target_state": "form_screen"
+          }
+        ],
+        "initial_state": true,
+        "final_state": false
+      },
+      {
+        "state_type": "screen",
+        "name": "form_screen",
+        "transitions": [
+          {
+            "target_state": "validate_form",
+            "event_name": "submit"
+          },
+          {
+            "target_state": "update_field",
+            "event_name": "field_changed"
+          }
+        ],
+        "initial_state": false,
+        "final_state": false
+      },
+      {
+        "state_type": "technical",
+        "name": "update_field",
+        "transitions": [
+          {
+            "target_state": "form_screen"
+          }
+        ],
+        "expressions": [
+          {
+            "variable": "form_valid",
+            "dependent_variables": ["name", "email", "age"],
+            "expression": "len(name) > 0 and '@' in email and age >= 18"
+          }
+        ],
+        "initial_state": false,
+        "final_state": false
+      },
+      {
+        "state_type": "technical",
+        "name": "validate_form",
+        "transitions": [
+          {
+            "target_state": "submit_data",
+            "condition": "form_valid"
+          },
+          {
+            "target_state": "form_screen",
+            "condition": "not form_valid"
+          }
+        ],
+        "expressions": [
+          {
+            "variable": "form_valid",
+            "dependent_variables": ["name", "email", "age"],
+            "expression": "len(name) > 0 and '@' in email and age >= 18"
+          },
+          {
+            "variable": "validation_error",
+            "dependent_variables": ["form_valid"],
+            "expression": "'Please fill all fields correctly' if not form_valid else ''"
+          }
+        ],
+        "initial_state": false,
+        "final_state": false
+      },
+      {
+        "state_type": "integration",
+        "name": "submit_data",
+        "transitions": [
+          {
+            "target_state": "success_screen",
+            "condition": "submit_success"
+          },
+          {
+            "target_state": "form_screen",
+            "condition": "not submit_success"
+          }
+        ],
+        "integration_config": {
+          "variable": "submit_response",
+          "url": "https://api.example.com/form/submit",
+          "params": {
+            "name": "$name",
+            "email": "$email",
+            "age": "$age"
+          },
+          "method": "post"
+        },
+        "expressions": [
+          {
+            "variable": "submit_success",
+            "dependent_variables": ["submit_response"],
+            "expression": "submit_response.get('status') == 'success'"
+          },
+          {
+            "variable": "submission_id",
+            "dependent_variables": ["submit_response"],
+            "expression": "submit_response.get('id', '')"
+          }
+        ],
+        "initial_state": false,
+        "final_state": false
+      },
+      {
+        "state_type": "screen",
+        "name": "success_screen",
+        "transitions": [
+          {
+            "target_state": "form_screen",
+            "event_name": "reset"
+          }
+        ],
+        "initial_state": false,
+        "final_state": true
+      },
+      {
+        "state_type": "service",
+        "name": "__error__",
+        "transitions": [
+          {
+            "target_state": "form_screen"
+          }
+        ],
+        "initial_state": false,
+        "final_state": false
+      }
+    ]
+  },
+  "predefined_context": {
+    "name": "",
+    "email": "",
+    "age": 0,
+    "form_valid": false,
+    "validation_error": "",
+    "submit_success": false,
+    "submission_id": ""
+  }
+}
